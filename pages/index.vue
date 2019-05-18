@@ -24,11 +24,6 @@ export default {
   text-align: center;
 }
 
-.content {
-  display: flex;
-  justify-content: space-around;
-}
-
 .title {
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;

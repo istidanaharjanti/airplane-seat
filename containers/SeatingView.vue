@@ -1,36 +1,44 @@
 <template>
-  <div class="content">
-    <div>
-      <input v-model="passengers" type="number" />
-      <input v-model="rowColSeat" type="text" />
-      <button @click="setSeat">
-        set passengers's seat
-      </button>
-    </div>
-    <div>{{ seats }}</div>
+  <div>
+    <input-form
+      :trigger-fn="setSeat"
+      @numberOfPassengers="getPassengerNumber"
+      @seatArea="getRowColSeat"
+    />
+    <passenger-seat :seats="seats" />
   </div>
 </template>
 
 <script>
+import PassengerSeat from '~/components/PassengerSeats.vue'
+import InputForm from '~/components/InputForm.vue'
+
 export default {
+  components: {
+    PassengerSeat,
+    InputForm
+  },
   data() {
     return {
       passengers: 0,
-      rowColSeat: '[[]]',
+      rowColSeat: '',
       seats: null
     }
   },
   methods: {
+    getRowColSeat(val) {
+      this.rowColSeat = val
+    },
+    getPassengerNumber(val) {
+      this.passengers = val
+    },
     setSeat() {
       const arraySeat = JSON.parse(this.rowColSeat)
-      console.log(this.passengers, arraySeat) // eslint-disable-line
       const rowSize = Math.max.apply(Math, arraySeat.map(e => e[0]))
       const colSize = Math.max.apply(Math, arraySeat.map(e => e[1]))
 
-      // Identify seats
-      this.seats = this.defineMAW(arraySeat)
+      this.seats = this.defineArea(arraySeat)
 
-      // Replace chars with numbers
       let obj = {}
       obj = this.passengerNumber(
         this.passengers,
@@ -57,10 +65,10 @@ export default {
         rowSize
       )
       this.seats = obj.seats
-      console.log(obj) // eslint-disable-line
+      // console.log(obj) // eslint-disable-line
     },
 
-    defineMAW(array) {
+    defineArea(array) {
       const seats = []
       for (let i = 0; i < array.length; i++) {
         seats.push(
@@ -82,7 +90,8 @@ export default {
       }
 
       for (let i = 0; i < seats[seats.length - 1].length; i++) {
-        seats[seats.length - 1][i][seats[seats.length - 1][i].length - 1] = 'W'
+        const rightWindow = seats.length - 1
+        seats[rightWindow][i][seats[rightWindow][i].length - 1] = 'W'
       }
 
       return seats
@@ -101,9 +110,15 @@ export default {
               seats[j][i][k] === val
             ) {
               if (counter > passengers) {
-                seats[j][i][k] = ''
+                seats[j][i][k] = {
+                  seatType: val,
+                  passengerNumber: ''
+                }
               } else {
-                seats[j][i][k] = counter
+                seats[j][i][k] = {
+                  seatType: val,
+                  passengerNumber: counter
+                }
               }
               counter++
             }
@@ -111,10 +126,17 @@ export default {
         }
       }
       return {
-        seats: seats,
-        counter: counter
+        seats,
+        counter
       }
     }
   }
 }
 </script>
+
+<style>
+.content {
+  display: flex;
+  flex-direction: column;
+}
+</style>
