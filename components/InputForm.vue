@@ -14,7 +14,7 @@
       type="text"
       @change="seatPositionArea($event.target.value)"
     />
-    <button @click="triggerFn">
+    <button style="margin-top: 20px" @click="triggerFn" :disabled="disabled">
       {{ triggerText }}
     </button>
   </div>
@@ -32,6 +32,10 @@ export default {
     triggerText: {
       type: String,
       default: 'Set Passenger Seat!'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -50,5 +54,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-right: 40px;
 }
 </style>

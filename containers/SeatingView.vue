@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="content">
     <input-form
       :trigger-fn="setSeat"
+      :disabled="disableButton"
       @numberOfPassengers="getPassengerNumber"
       @seatArea="getRowColSeat"
     />
-    <passenger-seat :seats="seats" />
+    <div class="airplane-wrapper">
+      <passenger-seat :seats="seats" />
+    </div>
   </div>
 </template>
 
@@ -22,15 +25,18 @@ export default {
     return {
       passengers: 0,
       rowColSeat: '',
-      seats: null
+      seats: null,
+      disableButton: true
     }
   },
   methods: {
     getRowColSeat(val) {
       this.rowColSeat = val
+      this.disableButton = !val
     },
     getPassengerNumber(val) {
       this.passengers = val
+      this.disableButton = !val
     },
     setSeat() {
       const arraySeat = JSON.parse(this.rowColSeat)
@@ -137,6 +143,10 @@ export default {
 <style>
 .content {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  padding: 50px 0;
+}
+.airplane-wrapper {
+  min-width: 10rem;
 }
 </style>

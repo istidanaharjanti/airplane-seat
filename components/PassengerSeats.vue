@@ -35,9 +35,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   border: 1px solid;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  padding-top: 200px;
+  padding: 15px;
 }
 .seatArea {
   padding: 5px;
@@ -52,8 +50,12 @@ export default {
 .seatPosition {
   border: 1px solid black;
   padding: 5px;
-  min-width: 50px;
-  min-height: 50px;
+  min-width: 1rem;
+  min-height: 1rem;
+  max-width: 2rem;
+  max-height: 2rem;
+  width: 2rem;
+  height: 2rem;
 }
 .seatColor-A {
   background: skyblue;
