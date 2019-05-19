@@ -34,7 +34,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border: 1px solid;
+  border: 1px solid #ced4da;
   padding: 15px;
 }
 .seatArea {

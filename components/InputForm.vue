@@ -1,22 +1,37 @@
 <template>
   <div class="form-wrapper">
-    <label for="passengerNumber">Number of Passengers</label>
-    <input
-      id="passengerNumber"
-      placeholder="0"
-      type="number"
-      @change="passengerNumber($event.target.value)"
-    />
-    <label for="seatPosition">Seat Layout</label>
-    <input
-      id="seatPosition"
-      placeholder="[[3,2], [4,3], [2,3], [3,4]]"
-      type="text"
-      @change="seatPositionArea($event.target.value)"
-    />
-    <button style="margin-top: 20px" @click="triggerFn" :disabled="disabled">
+    <b-form-group
+      class="label-name"
+      label="Number of Passengers"
+      label-for="passengerNumber"
+    >
+      <b-form-input
+        id="passengerNumber"
+        placeholder="0"
+        type="number"
+        @change="passengerNumber($event)"
+      />
+    </b-form-group>
+    <b-form-group
+      class="label-name"
+      label="Seat Layout"
+      label-for="seatPosition"
+    >
+      <b-form-input
+        id="seatPosition"
+        placeholder="[[3,2], [4,3], [2,3], [3,4]]"
+        type="text"
+        @change="seatPositionArea($event)"
+      />
+    </b-form-group>
+    <b-button
+      style="margin-top: 20px"
+      :disabled="disabled"
+      variant="primary"
+      @click="triggerFn"
+    >
       {{ triggerText }}
-    </button>
+    </b-button>
   </div>
 </template>
 
@@ -55,5 +70,8 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   margin-right: 40px;
+}
+.form-wrapper .label-name {
+  text-align: left;
 }
 </style>

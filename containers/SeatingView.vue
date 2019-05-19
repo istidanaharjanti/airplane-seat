@@ -6,8 +6,9 @@
       @numberOfPassengers="getPassengerNumber"
       @seatArea="getRowColSeat"
     />
-    <div class="airplane-wrapper">
-      <passenger-seat :seats="seats" />
+    <div>
+      <p class="title">Passengers Layout</p>
+      <passenger-seat v-if="seats && seats.length > 0" :seats="seats" />
     </div>
   </div>
 </template>
@@ -71,7 +72,6 @@ export default {
         rowSize
       )
       this.seats = obj.seats
-      // console.log(obj) // eslint-disable-line
     },
 
     defineArea(array) {
@@ -146,7 +146,8 @@ export default {
   width: 100%;
   padding: 50px 0;
 }
-.airplane-wrapper {
-  min-width: 10rem;
+.title {
+  text-align: left;
+  margin-bottom: 0.5rem;
 }
 </style>
