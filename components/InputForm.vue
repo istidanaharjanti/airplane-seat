@@ -29,6 +29,7 @@
       :disabled="disabled"
       variant="primary"
       @click="triggerFn"
+      @keydown.enter.native="triggerFn"
     >
       {{ triggerText }}
     </b-button>
