@@ -2,7 +2,7 @@
   <div class="content">
     <input-form
       :trigger-fn="setSeat"
-      :disabled="disableButton"
+      :disabled="disableButtonSubmit"
       @numberOfPassengers="getPassengerNumber"
       @seatArea="getRowColSeat"
     />
@@ -30,14 +30,17 @@ export default {
       disableButton: true
     }
   },
+  computed: {
+    disableButtonSubmit() {
+      return !(this.rowColSeat !== '' && this.passengers !== 0)
+    }
+  },
   methods: {
     getRowColSeat(val) {
       this.rowColSeat = val
-      this.disableButton = !val
     },
     getPassengerNumber(val) {
       this.passengers = val
-      this.disableButton = !val
     },
     setSeat() {
       const arraySeat = JSON.parse(this.rowColSeat)
